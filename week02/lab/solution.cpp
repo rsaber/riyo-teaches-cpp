@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 enum class Grade_t
 {
@@ -18,31 +19,31 @@ struct CountWams
 	{
 		switch(grade)
 		{
-			case HD:
+			case Grade_t::HD:
 			{
 				m_upperRange = 100;
 				m_lowerRange = 85;
 				break;
 			}
-			case D:
+			case Grade_t::D:
 			{
 				m_upperRange = 84;
 				m_lowerRange = 75;
 				break;
 			}
-			case CR:
+			case Grade_t::CR:
 			{
 				m_upperRange = 74;
 				m_lowerRange = 65;
 				break;
 			}
-			case P:
+			case Grade_t::P:
 			{
 				m_upperRange = 64;
 				m_lowerRange = 50;
 				break;
 			}
-			case F:
+			case Grade_t::F:
 			{
 				m_upperRange = 49;
 				m_lowerRange = 0;
@@ -59,7 +60,7 @@ struct CountWams
 
 double calculateGpa(const std::vector<int>& wams, bool is7Point)
 {
-	std::unordered_map gradeCounts;
+	std::unordered_map<std::string, size_t> gradeCounts{};
 
 	gradeCounts["HD"] = std::count_if(wams.begin(), wams.end(), CountWams(Grade_t::HD));
 	gradeCounts["D"] = std::count_if(wams.begin(), wams.end(), CountWams(Grade_t::D));
